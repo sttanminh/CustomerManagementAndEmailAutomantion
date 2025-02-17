@@ -6,7 +6,10 @@ use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\PdfDownloadController;
 use App\Http\Controllers\ProcessOrderController;
+use App\Filament\Widgets\LineChartWidget;
+// use App\Http\Controllers\ChartController;
 
+// Route::get('/chart', [ChartController::class, 'show']);
 
 Route::get('/notifications', function () {
     return view('notifications');
@@ -37,3 +40,11 @@ Route::get('/queue-downloads', [PdfDownloadController::class, 'processPdfs']);
 
 
 Route::get('/process-order',[ProcessOrderController::class,'processOrder']);
+
+Route::get('/linkedin/auth', [LinkedInController::class, 'redirectToLinkedIn']);
+Route::get('/linkedin/callback', [LinkedInController::class, 'handleLinkedInCallback']);
+Route::get('/linkedin/ad-accounts', [LinkedInController::class, 'getAdAccounts']);
+
+Route::get('/test-chart', function () {
+    return view('filament.widgets.line-chart-widget', ['widget' => new LineChartWidget()]);
+});
